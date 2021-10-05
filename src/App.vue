@@ -1,15 +1,18 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <Profile />
+  <Events />
 </template>
 
 <script>
 import Profile from './components/Profile.vue'
+import Events from './components/Events.vue'
 
 export default {
   name: 'App',
   components: {
-    Profile
+    Profile,
+    Events
   }
 }
 </script>

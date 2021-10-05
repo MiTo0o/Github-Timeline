@@ -1,32 +1,40 @@
 <template>
   <div class="hello">
+      {{ list }}
+
   </div>
 </template>
 
 <script>
+import { getUserEvents } from "../assets/github-events.js";
 
 export default {
-  name: 'Events',
-  props: {
+  name: 'timeline',
+  data() {
+    return {
+      list: "",
+    };
+  },
+
+  methods: {
+
+    async getEvents() {
+      try {
+        let events = await getUserEvents();
+        this.list = events;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+
+  created() {
+    this.getEvents();
   }
 }
-</script>
 
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
