@@ -22,6 +22,7 @@ export default {
       try {
         let events = await getUserEvents();
         this.list = events;
+        console.log(events);
       } catch (error) {
         console.log(error);
       }
