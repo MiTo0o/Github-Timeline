@@ -8,6 +8,18 @@
 
 <script>
 
+import { Octokit } from "octokit";
+const octokit = new Octokit({ auth: process.env.API_KEY});
+
+
+async function hehe() {
+  let pro = await octokit.request("GET /users/MiTo0o");
+  console.log(pro)
+  return pro;
+}
+
+hehe();
+
 
 export default {
   name: 'Profile',
