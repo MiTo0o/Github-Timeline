@@ -3,29 +3,21 @@
     <input v-model="name" placeholder="edit me">
     <p>Message is: {{ name }}</p>
     <button @click="getProfileData">Search</button>
+    {{ sheesh }}
   </div>
 </template>
 
 <script>
-
-import { Octokit } from "octokit";
-const octokit = new Octokit({ auth: process.env.API_KEY});
-
-
-async function hehe() {
-  let pro = await octokit.request("GET /users/MiTo0o");
-  console.log(pro)
-  return pro;
-}
-
-hehe();
-
+import { getUserInfo } from "../assets/github-profile.js";
+let x = getUserInfo();
+console.log(x);
 
 export default {
   name: 'Profile',
   data() {
     return {
       name: "",
+      sheesh : x
     };
   },
 
