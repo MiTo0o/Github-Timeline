@@ -11,4 +11,6 @@ jobs:
       with:
         username: 'MiTo0o'
         reponame: 'YourRepoName'
+        token: ${{ secrets.GITHUB_TOKEN }}
+      env:
         VUE_APP_APIURL: ${{ secrets.VUE_APP_APIURL }}
