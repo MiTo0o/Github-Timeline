@@ -1,13 +1,13 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <Profile />
+  <Profile />\
   <Events />
 </template>
 
 <script>
 import Profile from './components/Profile.vue'
 import Events from './components/Events.vue'
-
+console.log(console.log(VUE_APP_APIURL));
 export default {
   name: 'App',
   components: {
