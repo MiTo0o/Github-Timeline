@@ -7,7 +7,7 @@
 <script>
 import Profile from './components/Profile.vue'
 import Events from './components/Events.vue'
-console.log(console.log(VUE_APP_APIURL));
+console.log(process.env.VUE_APP_APIURL);
 export default {
   name: 'App',
   components: {
