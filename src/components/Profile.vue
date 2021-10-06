@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
-    <input v-model="name" placeholder="edit me">
-    <p>Message is: {{ name }}</p>
+    <form @submit.prevent="getUserName">
+      <input type="text" name="name">
+    </form>
     <button @click="getProfileData">Search</button>
     <img :src=avatarUrl>
     <p>{{ name }}</p>
@@ -40,6 +41,10 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    getUserName (submitEvent) {
+      this.name = submitEvent.target.elements.name.value
+      console.log(this.name);
     }
   },
 
