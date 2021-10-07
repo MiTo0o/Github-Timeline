@@ -14,7 +14,6 @@
 
 <script>
 import { getUserInfo } from "../assets/github-profile.js";
-
 export default {
   name: 'Profile',
   data() {
