@@ -1,16 +1,16 @@
 import { octokit } from "./octokit-setup.js";
 
-async function getUserEvents() {
+async function getUserEvents(user) {
     let events = [];
     let pageNum = 1;
-    let event = await octokit.request("GET /users/MiTo0o/events", {
+    let event = await octokit.request("GET /users/"+user+"/events", {
         per_page: 100,
         page: pageNum
     });
 
     while (event["data"].length != 0) {
         pageNum ++;
-        event = await octokit.request("GET /users/MiTo0o/events", {
+        event = await octokit.request("GET /users/"+user+"/events", {
             per_page: 100,
             page: pageNum
         });

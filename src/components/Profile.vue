@@ -2,18 +2,21 @@
   <div class="hello">
     <form @submit.prevent="getUserName">
       <input type="text" name="name">
+      <button type="submit">Search</button>
     </form>
-    <button @click="getProfileData">Search</button>
     <img :src=avatarUrl>
-    <p>{{ name }}</p>
-    <p>{{ followers }}</p>
-    <p>{{ following }}</p>
-
+    <p v-if="name">USERNAME: {{ name }}</p>
+    <p v-if="followers">FOLLOWERS: {{ followers }}</p>
+    <p v-if="following">FOLLOWING: {{ following }}</p>
+    <p v-if="list">RAW DATA:</p>
+    <p>{{ list }}</p>
+    <p>{{ status  }}</p>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from "../assets/github-profile.js";
+import { getUserEvents } from "../assets/github-events.js";
 export default {
   name: 'Profile',
   data() {
@@ -22,7 +25,8 @@ export default {
       avatarUrl: "",
       followers: "",
       follwing: "",
-
+      list: "",
+      status: ""
     };
   },
 
@@ -30,25 +34,48 @@ export default {
     getProfileData() {
       console.log(this.name);
     },
-    async getData() {
+    async getData(us) {
       try {
-        let user = await getUserInfo();
+        let user = await getUserInfo(us);
         this.avatarUrl = user["data"]["avatar_url"];
-        this.name = user["data"]["name"];
+        this.name = us;
         this.followers = user["data"]["followers"];
         this.following = user["data"]["following"];
       } catch (error) {
         console.log(error);
+        this.avatarUrl = "";
+        this.name =  "";
+        this.followers =  "";
+        this.following =  "";
+        this.list = "";
+        this.status = "USER NOT FOUND";
+      }
+    },
+    async getEvents(us) {
+      try {
+        let events = await getUserEvents(us);
+        this.list = events;
+        console.log(events);
+      } catch (error) {
+        console.log(error);
+        this.avatarUrl = "";
+        this.name =  "";
+        this.followers =  "";
+        this.following =  "";
+        this.list = "";
+        this.status = "USER NOT FOUND";
       }
     },
     getUserName (submitEvent) {
       this.name = submitEvent.target.elements.name.value
       console.log(this.name);
+      this.getData(this.name);
+      this.getEvents(this.name);
     }
   },
 
   created() {
-    this.getData();
+
   }
 }
 
